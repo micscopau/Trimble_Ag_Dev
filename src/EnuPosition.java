@@ -38,13 +38,10 @@ public class EnuPosition {
 		}
 	}
 
-	void setLLA(LlaPos llaPos) { 
-		
-	}
-	
-	void setXYZ(XyzPos xyzPos) {
-		
-	}
+	//Latitude, Longitude, Altitude coordinates
+	//void setLLA(LlaPos llaPos) {	}
+
+	//void setXYZ(XyzPos xyzPos) {	}
 
 
 }
