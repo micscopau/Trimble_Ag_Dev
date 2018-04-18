@@ -1,20 +1,19 @@
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class AppliedArea {
 
-	private ArrayList<Polygon> polygons;
+	private ArrayList<AgPolygon> polygons;
 
 	public AppliedArea(){
-		polygons = new ArrayList<Polygon>();
+		polygons = new ArrayList<AgPolygon>();
 	}	
 
-	public void addPolygon(Polygon poly){
+	public void addPolygon(AgPolygon poly){
 
 	}
 
-	public boolean checkOverlap(Polygon poly){
+	public boolean checkOverlap(AgPolygon poly){
 		return false;
 	}
 	
