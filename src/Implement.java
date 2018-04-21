@@ -49,6 +49,12 @@ public class Implement implements TractorPositionListener {
         if (!turnAllNozzlesOn) {
             //determine what is largest possible rectangle of nozzles spraying that does not overlap
 
+            //Assuming that we will only have consecutive/neighboring nozzles turned on, and not combinations of gaps
+            //This reduces the amount of combinations we have to check from 2^nozzleCount
+            // down to (nozzleCount^2 + nozzleCount +2)/2
+            // which is known as the lazy caterers sequence:
+            // https://en.wikipedia.org/wiki/Lazy_caterer%27s_sequence
+
             for (int i = 0; i < nozzles.length; i++) {
                 lNozPos = calculateNozzlePosition(i);
                 lNozInd = i;
