@@ -14,8 +14,8 @@ public class AppliedArea {
 	}
 
 	public boolean checkOverlapAllBool(AgPolygon poly){
-	    boolean overlap = true;
-        //EnuPosition pAi, pAj;
+	    boolean overlap = false;
+
         double alfx = poly.getlF().getEast();
         double alfy = poly.getlF().getNorth();
 
@@ -31,26 +31,28 @@ public class AppliedArea {
             double brbx = thisPoly.getrB().getEast();
             double brby = thisPoly.getrB().getNorth();
 
-            //this only handles rectangles oriented parallel to x axis
+            //Best method that I've found so far would most likely be point inclusion in Polygons:
+            // https://wrf.ecse.rpi.edu//Research/Short_Notes/pnpoly.html
+            // https://stackoverflow.com/questions/8721406/how-to-determine-if-a-point-is-inside-a-2d-convex-polygon'
+
+            //This might be easily extended to checking a line, or just checking both end points of a line might be
+            // nearly as effective
+
+
+            //this method only handles right angle rectangles oriented parallel to each other
             /*
             if(pAIX > pBJ.getEast() || pBI.getEast() > pAJX
                     || pAIY < pBJ.getNorth() || pBI.getNorth() < pAJY){
-                    */
-            //2.x > 1.x
-            if(alfx > brbx){
-                overlap = false;
             }
-            if(blfx > arbx){
-                overlap = false;
-            }
-            if(alby > brfy){
-                overlap = false;
-            }
-            if(blby > arfy){
-                overlap = false;
-            }
+             */
 
 
+            //We can always brute force check every combination of points being outside of the other polygon,
+            //but it is very clear that this is a prime example of brute force being the wrong idea.
+            /*
+            if((alfx > brbx && alfy > brby )|| ...){
+            }
+            */
 
         }
 
@@ -74,6 +76,34 @@ public class AppliedArea {
 	    boolean overlap = false;
 
         return overlap;
+    }
+
+    public ArrayList<AgPolygon> sortAppliedArea(ArrayList<AgPolygon> polys){
+	    ArrayList<AgPolygon> sorted = new ArrayList<AgPolygon>();
+
+	    //Sort coordinates by distance from a given point:
+	    //https://stackoverflow.com/questions/30636014/how-to-order-a-list-of-points-by-distance-to-a-given-point
+
+        //If the unsorted list is short enough, it might be acceptable to call this sort based on current tractor/implement location
+        //and only need to check the first so many entries for overlap based on implement width.
+
+        //we could also just always sort based on origin, and once we have the polygon index that caused the overlap violation,
+        //we check the polygons in the list near the conflicting polygon.
+        // I foresee issues (if the polygons have not been consolidated) with nearby points in an arbitrary direction being far away in the
+        // sorted list though.
+
+	    return sorted;
+    }
+
+    public ArrayList<AgPolygon> consolidateAppliedArea(ArrayList<AgPolygon> polys){
+	    ArrayList<AgPolygon> shrunk = new ArrayList<AgPolygon>();
+
+	    //First thoughts are to check if 2 neighboring polygons (in sorted list) share 2 points in common.
+        // If so, we can definitely merge them.
+        //Foresee issues with gaps on the order of 1 inch (resolution of instrumentation), so perhaps if neighboring polygons
+        // are within a margin of error range that is <= width of 1 sprayer
+
+	    return shrunk;
     }
 
 	

@@ -12,6 +12,10 @@ public class Implement implements TractorPositionListener {
     private EnuPosition currRPos;
     private AppliedArea appliedArea;
 
+    //TODO: Create a nozzle class, or very least convert nozzles array into hashmap/dictionary with
+    // On/Off, Distance from Center of Implement
+    //Might be case of if we have more memory, or need quicker runtime, calculating distance from center doesn't take that long,
+    //but making a hashmap with these values doesn't add that much space either.
     private int nozzleCount = 12;
     private boolean nozzleCountEven = (nozzleCount & 1) == 0;
     private boolean[] nozzles = new boolean[(nozzleCountEven) ? nozzleCount + 1 : nozzleCount]; //add 1 to nozzle array if odd NozzleCount
